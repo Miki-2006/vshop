@@ -4,12 +4,14 @@ import { CartItem } from "@/store/cart-store";
 import { redirect } from "next/navigation";
 
 export const checkoutAction = async (formData: FormData): Promise<void> => {
+    
     const itemsJson = formData.get("items") as string;
     const items = JSON.parse(itemsJson);
+    console.log(items);
     const line_items = items.map((item: CartItem) => ({
         quantity: item.quantity,
         price_data: {
-            currency: "cad",
+            currency: "usd",
             product_data: {name: item.name},
             unit_amount: item.price
         }

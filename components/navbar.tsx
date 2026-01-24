@@ -8,6 +8,13 @@ import {
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
+import {Pridi} from "next/font/google"
+
+const pridi = Pridi({
+  weight: '600',
+  subsets: ['latin'],
+  display: 'swap',
+})
 
 export const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
@@ -28,8 +35,8 @@ export const Navbar = () => {
   return (
     <nav className="sticky top-0 z-50 bg-white shadow">
       <div className="container mx-auto flex items-center justify-between px-4 py-4">
-        <Link href="/" className="hover:text-blue-600">
-          vshop
+        <Link href="/" className="text-3xl hover:text-blue-600">
+          <span className={pridi.className}>Vshop</span>
         </Link>
         <div className="hidden md:flex space-x-6">
           <Link href="/">Home</Link>

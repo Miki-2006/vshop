@@ -1,46 +1,48 @@
 "use client"
-import Stripe from "stripe";
 import { Card, CardContent, CardTitle } from "./ui/card";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import cover from "../public/Cover.jpg"
+import cover1 from "../public/Cover1.jpg"
+import cover2 from "../public/Cover2.jpg"
+import {Pridi} from "next/font/google"
 
-interface Props {
-  products: Stripe.Product[];
-}
+const pridi = Pridi({
+  weight: '600',
+  subsets: ['latin'],
+  display: 'swap',
+})
 
-export const Carousel = ({ products }: Props) => {
+const covers = [cover, cover1, cover2]
+
+
+export const Carousel = () => {
   const [current, setCurrent] = useState<number>(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % products.length);
+      setCurrent((prev) => (prev + 1) % covers.length);
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [products.length]);
+  }, [covers.length]);
 
-  const currentProduct = products[current];
+  const currentProduct = covers[current];
 
-  const price = currentProduct.default_price as Stripe.Price;
 
   return (
     <Card className="relative overflow-hidden rounded-lg shadow-md border-gray-300">
-      {currentProduct.images && currentProduct.images[0] && (
         <div className="relative h-80 w-full">
           <Image
-            alt={currentProduct.name}
-            src={currentProduct.images[0]}
+            alt="cover"
+            src={currentProduct}
             layout="fill"
             objectFit="cover"
             className="transition-opacity durication-500 ease-in-out"
           />
         </div>
-      )}
-      <CardContent className="absolute inset-0 flex flex-col items-center justify-center">
-        <CardTitle className="text-3xl font-bold text-white mb-2">{currentProduct.name}</CardTitle>
-        {price && price.unit_amount && (
-            <p>${(price.unit_amount / 100).toFixed(2)}</p>
-        )}
+      <CardContent className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50">
+        <CardTitle className="text-3xl font-bold text-white mb-2"><span className={pridi.className}>Apple Products</span></CardTitle>
       </CardContent>
     </Card>
   );

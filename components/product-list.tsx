@@ -24,8 +24,9 @@ export const ProductList = ({ products }: Props) => {
     <div>
       <div className="mb-6 flex justify-center">
         <input
-          className="w-full max-w-md rounded border border-gray-300 px-4 py-2 focus:outline-none"
+          className="w-full max-w-md rounded border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           type="text"
+          value={searchTerm}
           placeholder="Search products..."
           onChange={(e) => setSearchTerm(e.target.value)}
         />
